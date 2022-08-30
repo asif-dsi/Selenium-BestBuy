@@ -4,9 +4,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import utillities.Utils;
 
 import java.time.Duration;
 import java.util.List;
@@ -14,6 +14,7 @@ import java.util.List;
 public class TC_02 {
     WebDriver driver;
     WebDriverWait wait;
+    Utils utils;
 
     public TC_02(WebDriver driver) {
         this.driver = driver;
@@ -35,12 +36,15 @@ public class TC_02 {
 
     public void search() {
         wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-        wait.until(ExpectedConditions.elementToBeClickable(btnMenu)).click();
+        utils = new Utils(driver);
+        utils.pleaseWait(btnMenu);
+        btnMenu.click();
         subMenu.get(6).click();
         System.out.println("What?");
         subMenu2.click();
         laptopBtn.click();
-        wait.until(ExpectedConditions.elementToBeClickable(navLink)).click();
+        utils.pleaseWait(navLink);
+        navLink.click();
         for (int i = 0; i < assertSku.size(); i++) {
             String a = assertSku.get(i).getText();
             Assert.assertTrue(a.contains("Laptop"));

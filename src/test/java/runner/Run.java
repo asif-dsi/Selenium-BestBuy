@@ -23,7 +23,7 @@ public class Run extends Setup {
     public void run2() {
         driver.get("https://www.bestbuy.com");
         TC_01 tc_01 = new TC_01(driver);
-        tc_01.step_1();
+        //tc_01.step_1();
         TC_02 tc_02 = new TC_02(driver);
         tc_02.search();
     }

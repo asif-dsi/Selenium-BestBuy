@@ -6,12 +6,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utillities.Utils;
 
 import java.io.IOException;
-import java.time.Duration;
 
 public class TC_01 {
     WebDriver driver;
@@ -50,9 +48,11 @@ public class TC_01 {
     }
 
     public void step_2() {
-        wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-        wait.until(ExpectedConditions.elementToBeClickable(dropDownAccount)).click();
-        wait.until(ExpectedConditions.elementToBeClickable(btnCreateAcc)).click();
+        utils = new Utils(driver);
+        utils.pleaseWait(dropDownAccount);
+        dropDownAccount.click();
+        utils.pleaseWait(btnCreateAcc);
+        btnCreateAcc.click();
     }
 
     public void doSignUp() throws IOException, ParseException {
@@ -66,13 +66,14 @@ public class TC_01 {
         utils = new Utils(driver);
         utils.inputJSONArray(fakeEmail, fakePass);
 
-        wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-        wait.until(ExpectedConditions.elementToBeClickable(first)).sendKeys(firstName);
+        utils.pleaseWait(first);
+        first.sendKeys(firstName);
         last.sendKeys(lastName);
         email.sendKeys(fakeEmail);
         pass.sendKeys(fakePass);
         confirmPass.sendKeys(fakePass);
         phone.sendKeys(fakePhone);
-        wait.until(ExpectedConditions.elementToBeClickable(btnSubmit)).click();
+        utils.pleaseWait(btnSubmit);
+        btnSubmit.click();
     }
 }
